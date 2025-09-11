@@ -12,7 +12,8 @@ end
 vim.opt.rtp:prepend(lazypath)
 
 require("lazy").setup({
-
-    {"ellisonleao/gruvbox.nvim", priority = 1000 , config = true}
-
+    spec = {
+        import = "plugins/setups"
+    },
+    change_detection = {notify = false}
 })
