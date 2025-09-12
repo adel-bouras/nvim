@@ -14,7 +14,7 @@ return {
         "folke/tokyonight.nvim",
         config = function()
             vim.cmd.colorscheme "tokyonight"
-            -- transparent() uncomment for transparent nvim bg
+            -- transparent() --uncomment for transparent nvim bg
         end
     }
 }
