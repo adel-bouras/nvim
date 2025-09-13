@@ -10,9 +10,6 @@ return {
             indent = {
                 enable = true
             },
-            autotag = {
-                enable = true
-            },
             ensure_installed = {
                 "lua",
                 "tsx",
@@ -21,6 +18,5 @@ return {
             },
             auto_install = false
         })
-
     end
 }

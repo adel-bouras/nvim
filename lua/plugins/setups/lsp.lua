@@ -21,7 +21,7 @@ return {
             "go",
             "typescript",
             "c++",
-            "py"
+            "py",
         }
         -- Create a keymap for vim.lsp.buf.implementation
         vim.api.nvim_create_autocmd('LspAttach', {
@@ -110,6 +110,8 @@ return {
                 "pyright",
                 "yamlls",
                 "clangd",
+                "html",
+                "cssls"
             },
             handlers = {
                 function(server_name)
