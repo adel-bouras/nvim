@@ -22,6 +22,7 @@ return {
             "typescript",
             "c++",
             "py",
+            "java"
         }
         -- Create a keymap for vim.lsp.buf.implementation
         vim.api.nvim_create_autocmd('LspAttach', {
@@ -111,7 +112,8 @@ return {
                 "yamlls",
                 "clangd",
                 "html",
-                "cssls"
+                "cssls",
+                "jdtls"
             },
             handlers = {
                 function(server_name)
