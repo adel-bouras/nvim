@@ -113,7 +113,8 @@ return {
                 "clangd",
                 "html",
                 "cssls",
-                "jdtls"
+                "jdtls",
+                "gopls"
             },
             handlers = {
                 function(server_name)
