@@ -114,7 +114,8 @@ return {
                 "html",
                 "cssls",
                 "jdtls",
-                "gopls"
+                "gopls",
+                "tailwindcss"
             },
             handlers = {
                 function(server_name)
