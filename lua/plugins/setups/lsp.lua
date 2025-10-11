@@ -44,10 +44,6 @@ return {
                 end
             end
         })
-        vim.lsp.config('sqls', {
-            -- your custom client configuration
-        })
-        vim.lsp.enable('sqls')
         -- Add borders to floating windows
         vim.lsp.handlers['textDocument/hover'] = vim.lsp.with(
             vim.lsp.handlers.hover,
@@ -148,6 +144,7 @@ return {
         })
 
         local cmp = require('cmp')
+
 
         require('luasnip.loaders.from_vscode').lazy_load()
 
