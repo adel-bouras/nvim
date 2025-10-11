@@ -22,7 +22,8 @@ return {
             "typescript",
             "c++",
             "py",
-            "java"
+            "java",
+            "sql"
         }
         -- Create a keymap for vim.lsp.buf.implementation
         vim.api.nvim_create_autocmd('LspAttach', {
@@ -43,7 +44,10 @@ return {
                 end
             end
         })
-
+        vim.lsp.config('sqls', {
+            -- your custom client configuration
+        })
+        vim.lsp.enable('sqls')
         -- Add borders to floating windows
         vim.lsp.handlers['textDocument/hover'] = vim.lsp.with(
             vim.lsp.handlers.hover,

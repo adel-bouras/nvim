@@ -14,7 +14,8 @@ return {
                 "lua",
                 "tsx",
                 "typescript",
-                "go"
+                "go",
+                "sql"
             },
             auto_install = false
         })
