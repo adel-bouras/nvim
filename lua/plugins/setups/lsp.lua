@@ -53,7 +53,12 @@ return {
             vim.lsp.handlers.signature_help,
             { border = 'rounded' }
         )
-
+        cmp.setup.filetype({ "sql" }, {
+            sources = {
+                { name = "vim-dadbod-completion" },
+                { name = "buffer" }
+            }
+        })
         -- Configure error/warnings interface
         vim.diagnostic.config({
             virtual_text = true,
