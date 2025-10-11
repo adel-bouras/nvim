@@ -53,12 +53,6 @@ return {
             vim.lsp.handlers.signature_help,
             { border = 'rounded' }
         )
-        cmp.setup.filetype({ "sql" }, {
-            sources = {
-                { name = "vim-dadbod-completion" },
-                { name = "buffer" }
-            }
-        })
         -- Configure error/warnings interface
         vim.diagnostic.config({
             virtual_text = true,
@@ -150,10 +144,17 @@ return {
 
         local cmp = require('cmp')
 
+        cmp.setup.filetype({ "sql" }, {
+            sources = {
+                { name = "vim-dadbod-completion" },
+                { name = "buffer" }
+            }
+        })
 
         require('luasnip.loaders.from_vscode').lazy_load()
 
         vim.opt.completeopt = { 'menu', 'menuone', 'noselect' }
+
 
         cmp.setup({
             preselect = 'item',
