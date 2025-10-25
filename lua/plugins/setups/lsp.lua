@@ -17,7 +17,6 @@ return {
     config = function()
         local autoformat_filetypes = {
             "lua",
-            "go",
             "py",
             "java",
             "sql"
