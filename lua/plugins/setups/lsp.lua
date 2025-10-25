@@ -17,10 +17,7 @@ return {
     config = function()
         local autoformat_filetypes = {
             "lua",
-            "tsx",
             "go",
-            "typescript",
-            "c++",
             "py",
             "java",
             "sql"
@@ -119,7 +116,12 @@ return {
             handlers = {
                 function(server_name)
                     if server_name == "luals" then return end -- avoid starting with {}
-                    require('lspconfig')[server_name].setup({})
+                    require('lspconfig')[server_name].setup({
+                        on_attach = function(client, bufnr)
+                            -- Disable tsserver formatting
+                            client.server_capabilities.documentFormattingProvider = false
+                        end,
+                    })
                 end,
 
                 lua_ls = function()
