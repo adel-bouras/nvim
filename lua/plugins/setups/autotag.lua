@@ -3,11 +3,10 @@ return {
         "windwp/nvim-ts-autotag",
         dependencies = { "nvim-treesitter/nvim-treesitter" },
         config = function()
-            require("nvim-treesitter.configs").setup({
-                matchup = {
-                    enable = true,
-                    disable_virtual_text = true,
-                },
+            require("nvim-ts-autotag").setup({
+                check_ts = true, -- use Treesitter for context
+                html = true, -- enable for HTML
+                filetypes = { "html", "xml", "jsx", "tsx", "vue", "php", "markdown" },
             })
         end,
     },
