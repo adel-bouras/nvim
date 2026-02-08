@@ -13,7 +13,7 @@ return {
         "zbirenbaum/copilot-cmp",
         -- Snippets
         'L3MON4D3/LuaSnip',
-        'rafamadriz/friendly-snippets',
+        'onsails/lspkind.nvim', 'rafamadriz/friendly-snippets',
     },
     config = function()
         local autoformat_filetypes = {
@@ -164,7 +164,14 @@ return {
                 completeopt = 'menu,menuone,noinsert'
             },
             window = {
-                documentation = cmp.config.window.bordered(),
+                completion = cmp.config.window.bordered({
+                    border = 'rounded',
+                    winhighlight = 'Normal:Normal,FloatBorder:BorderBG,CursorLine:PmenuSel,Search:None',
+                }),
+                documentation = cmp.config.window.bordered({
+                    border = 'rounded',
+                    winhighlight = 'Normal:Normal,FloatBorder:BorderBG,CursorLine:PmenuSel,Search:None',
+                }),
             },
             sources = {
                 { name = 'path' },
@@ -179,18 +186,57 @@ return {
                 end,
             },
             formatting = {
-                fields = { 'abbr', 'menu', 'kind' },
-                format = function(entry, item)
-                    local n = entry.source.name
-                    if n == 'nvim_lsp' then
-                        item.menu = '[LSP]'
-                    elseif n == "copilot" then
-                        item.kind = " Copilot"
-                        item.kind_hl_group = "CmpItemKindCopilot"
-                    else
-                        item.menu = string.format('[%s]', n)
-                    end
-                    return item
+                fields = { 'kind', 'abbr', 'menu' },
+                format = function(entry, vim_item)
+                    local lspkind = require('lspkind')
+                    local kind = lspkind.cmp_format({
+                        mode = 'symbol_text',
+                        maxwidth = 50,
+                        ellipsis_char = '...',
+                        symbol_map = {
+                            Copilot = "",
+                            Text = "󰉿",
+                            Method = "󰆧",
+                            Function = "󰊕",
+                            Constructor = "",
+                            Field = "󰜢",
+                            Variable = "󰀫",
+                            Class = "󰠱",
+                            Interface = "",
+                            Module = "",
+                            Property = "󰜢",
+                            Unit = "󰑭",
+                            Value = "󰎠",
+                            Enum = "",
+                            Keyword = "󰌋",
+                            Snippet = "",
+                            Color = "󰏘",
+                            File = "󰈙",
+                            Reference = "󰈇",
+                            Folder = "󰉋",
+                            EnumMember = "",
+                            Constant = "󰏿",
+                            Struct = "󰙅",
+                            Event = "",
+                            Operator = "󰆕",
+                            TypeParameter = "",
+                        },
+                    })(entry, vim_item)
+
+                    local strings = vim.split(kind.kind, "%s", { trimempty = true })
+                    kind.kind = " " .. (strings[1] or "") .. " "
+                    kind.menu = "   (" .. (strings[2] or "") .. ")"
+
+                    -- Color coding by source
+                    local source_colors = {
+                        copilot = "CmpItemKindCopilot",
+                        nvim_lsp = "CmpItemKindDefault",
+                        luasnip = "CmpItemKindSnippet",
+                    }
+
+                    kind.kind_hl_group = source_colors[entry.source.name] or "CmpItemKindDefault"
+
+                    return kind
                 end,
             },
             mapping = cmp.mapping.preset.insert({
@@ -249,6 +295,15 @@ return {
                 end, { 'i', 's' }),
             }),
         })
+        -- Custom highlight groups
         vim.api.nvim_set_hl(0, "CmpItemKindCopilot", { fg = "#6CC644" })
+        vim.api.nvim_set_hl(0, "CmpItemKindSnippet", { fg = "#D4A5A5" })
+        vim.api.nvim_set_hl(0, "CmpItemKindDefault", { fg = "#A6B5C5" })
+
+        -- Style the completion menu
+        vim.api.nvim_set_hl(0, "CmpItemAbbrDeprecated", { fg = "#7E8E91", strikethrough = true })
+        vim.api.nvim_set_hl(0, "CmpItemAbbrMatch", { fg = "#82AAFF", bold = true })
+        vim.api.nvim_set_hl(0, "CmpItemAbbrMatchFuzzy", { fg = "#82AAFF", bold = true })
+        vim.api.nvim_set_hl(0, "CmpItemMenu", { fg = "#C792EA", italic = true })
     end
 }
