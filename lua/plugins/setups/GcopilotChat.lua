@@ -11,9 +11,9 @@ return {
         chat.setup({
             debug = false, -- set to true if you want to see logs
             window = {
-                layout = "float", -- 'vertical', 'horizontal', or 'float'
-                width = 0.8,
-                height = 0.8,
+                layout = "vertical", -- 'vertical', 'horizontal', or 'float'
+                width = 0.3,
+                height = 0.9,
                 border = "rounded",
             },
             prompts = {
