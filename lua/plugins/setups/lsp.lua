@@ -10,6 +10,7 @@ return {
         'saadparwaiz1/cmp_luasnip',
         'hrsh7th/cmp-nvim-lsp',
         'hrsh7th/cmp-nvim-lua',
+        "zbirenbaum/copilot-cmp",
         -- Snippets
         'L3MON4D3/LuaSnip',
         'rafamadriz/friendly-snippets',
@@ -168,6 +169,7 @@ return {
             sources = {
                 { name = 'path' },
                 { name = 'nvim_lsp' },
+                { name = "copilot", group_index = 2 }, -- ADD THIS LINE
                 { name = 'buffer',  keyword_length = 3 },
                 { name = 'luasnip', keyword_length = 2 },
             },
@@ -182,6 +184,9 @@ return {
                     local n = entry.source.name
                     if n == 'nvim_lsp' then
                         item.menu = '[LSP]'
+                    elseif n == "copilot" then
+                        item.kind = " Copilot"
+                        item.kind_hl_group = "CmpItemKindCopilot"
                     else
                         item.menu = string.format('[%s]', n)
                     end
@@ -244,5 +249,6 @@ return {
                 end, { 'i', 's' }),
             }),
         })
+        vim.api.nvim_set_hl(0, "CmpItemKindCopilot", { fg = "#6CC644" })
     end
 }

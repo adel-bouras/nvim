@@ -1,33 +1,40 @@
 return {
     "CopilotC-Nvim/CopilotChat.nvim",
-    branch = "main",            -- the main active branch
+    branch = "main",
     dependencies = {
-        { "zbirenbaum/copilot.lua" }, -- your existing Copilot setup
-        { "nvim-lua/plenary.nvim" }, -- required for async stuff
+        { "zbirenbaum/copilot.lua" },
+        { "nvim-lua/plenary.nvim" },
     },
+    event = "VeryLazy",
     config = function()
         local chat = require("CopilotChat")
-
         chat.setup({
-            debug = false, -- set to true if you want to see logs
+            debug = false,
             window = {
-                layout = "vertical", -- 'vertical', 'horizontal', or 'float'
+                layout = "vertical",
                 width = 0.3,
                 height = 0.9,
                 border = "rounded",
             },
-            prompts = {
-                Explain = "Explain this code",
-                Fix = "Find problems and fix them",
-                Optimize = "Make this faster or cleaner",
-                Docs = "Add helpful documentation",
-                Tests = "Write unit tests for this code",
+            mappings = {
+                submit_prompt = {
+                    normal = "<CR>", -- Press Enter in normal mode to send
+                    insert = "<C-s>", -- Press Ctrl+s in insert mode to send
+                },
+                reset = {
+                    normal = "<C-r>", -- Reset chat
+                },
             },
         })
 
-        -- Keymaps
-        vim.keymap.set("n", "<leader>cc", chat.open, { desc = "Open Copilot Chat" })
-        vim.keymap.set("v", "<leader>cc", chat.open, { desc = "Chat about selected code" })
+        -- Toggle with Ctrl+c
+        vim.keymap.set({ "n", "i", "v" }, "<C-c>", function()
+            chat.toggle()
+        end, { desc = "Toggle Copilot Chat" })
+
+        -- Other useful keymaps
+        vim.keymap.set("v", "<Space>ce", ":CopilotChatExplain<CR>", { desc = "Explain code" })
+        vim.keymap.set("v", "<Space>cf", ":CopilotChatFix<CR>", { desc = "Fix code" })
     end,
-    cmd = { "CopilotChat", "CopilotChatOpen", "CopilotChatExplain", "CopilotChatFix" },
+    -- REMOVE the cmd line - it's causing lazy loading conflicts
 }
