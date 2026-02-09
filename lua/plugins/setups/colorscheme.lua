@@ -30,7 +30,7 @@ return {
         config = function()
             require("tokyonight").setup({
                 style = "moon", -- storm, moon, night, day
-                transparent = false, -- toggle with true
+                transparent = true, -- toggle with true
                 terminal_colors = false,
                 styles = {
                     comments = { italic = true },
@@ -41,7 +41,7 @@ return {
             })
             vim.cmd.colorscheme("tokyonight")
             --            vim.o.background = "dark"
-            --transparent() --uncomment for transparent nvim bg
+            transparent() --uncomment for transparent nvim bg
         end,
     },
 }

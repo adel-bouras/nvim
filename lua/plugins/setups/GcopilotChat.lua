@@ -9,11 +9,11 @@ return {
     config = function()
         local chat = require("CopilotChat")
         chat.setup({
-            debug = false,
+            debug = true,
             window = {
                 layout = "vertical",
                 width = 0.3,
-                height = 0.9,
+                height = 1,
                 border = "rounded",
             },
             mappings = {
@@ -28,7 +28,7 @@ return {
         })
 
         -- Toggle with Ctrl+c
-        vim.keymap.set({ "n", "i", "v" }, "<C-c>", function()
+        vim.keymap.set({ "n", "i", "v" }, "<C-x>", function()
             chat.toggle()
         end, { desc = "Toggle Copilot Chat" })
 

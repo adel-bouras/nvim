@@ -188,55 +188,55 @@ return {
             formatting = {
                 fields = { 'kind', 'abbr', 'menu' },
                 format = function(entry, vim_item)
-                    local lspkind = require('lspkind')
-                    local kind = lspkind.cmp_format({
-                        mode = 'symbol_text',
-                        maxwidth = 50,
-                        ellipsis_char = '...',
-                        symbol_map = {
-                            Copilot = "",
-                            Text = "󰉿",
-                            Method = "󰆧",
-                            Function = "󰊕",
-                            Constructor = "",
-                            Field = "󰜢",
-                            Variable = "󰀫",
-                            Class = "󰠱",
-                            Interface = "",
-                            Module = "",
-                            Property = "󰜢",
-                            Unit = "󰑭",
-                            Value = "󰎠",
-                            Enum = "",
-                            Keyword = "󰌋",
-                            Snippet = "",
-                            Color = "󰏘",
-                            File = "󰈙",
-                            Reference = "󰈇",
-                            Folder = "󰉋",
-                            EnumMember = "",
-                            Constant = "󰏿",
-                            Struct = "󰙅",
-                            Event = "",
-                            Operator = "󰆕",
-                            TypeParameter = "",
-                        },
-                    })(entry, vim_item)
-
-                    local strings = vim.split(kind.kind, "%s", { trimempty = true })
-                    kind.kind = " " .. (strings[1] or "") .. " "
-                    kind.menu = "   (" .. (strings[2] or "") .. ")"
-
-                    -- Color coding by source
-                    local source_colors = {
-                        copilot = "CmpItemKindCopilot",
-                        nvim_lsp = "CmpItemKindDefault",
-                        luasnip = "CmpItemKindSnippet",
+                    local kind_icons = {
+                        Text = "󰉿",
+                        Method = "󰆧",
+                        Function = "󰊕",
+                        Constructor = "",
+                        Field = "󰜢",
+                        Variable = "󰀫",
+                        Class = "󰠱",
+                        Interface = "",
+                        Module = "",
+                        Property = "󰜢",
+                        Unit = "󰑭",
+                        Value = "󰎠",
+                        Enum = "",
+                        Keyword = "󰌋",
+                        Snippet = "",
+                        Color = "󰏘",
+                        File = "󰈙",
+                        Reference = "󰈇",
+                        Folder = "󰉋",
+                        EnumMember = "",
+                        Constant = "󰏿",
+                        Struct = "󰙅",
+                        Event = "",
+                        Operator = "󰆕",
+                        TypeParameter = "",
                     }
 
-                    kind.kind_hl_group = source_colors[entry.source.name] or "CmpItemKindDefault"
+                    -- Check if it's from Copilot source and override the icon
+                    if entry.source.name == 'copilot' then
+                        vim_item.kind = ""
+                        vim_item.kind_hl_group = "CmpItemKindCopilot"
+                    else
+                        -- Use the icon for the kind
+                        local icon = kind_icons[vim_item.kind] or ""
+                        vim_item.kind = string.format('%s %s', icon, vim_item.kind)
+                    end
 
-                    return kind
+                    -- Source menu
+                    local source_menu = {
+                        copilot = "[Copilot]",
+                        nvim_lsp = "[LSP]",
+                        luasnip = "[Snippet]",
+                        buffer = "[Buffer]",
+                        path = "[Path]",
+                    }
+                    vim_item.menu = source_menu[entry.source.name] or string.format("[%s]", entry.source.name)
+
+                    return vim_item
                 end,
             },
             mapping = cmp.mapping.preset.insert({
