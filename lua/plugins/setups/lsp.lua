@@ -25,6 +25,7 @@ return {
         -- Create a keymap for vim.lsp.buf.implementation
         vim.api.nvim_create_autocmd('LspAttach', {
             callback = function(args)
+                vim.lsp.inlay_hint.enable(true, { bufnr = args.buf })
                 local client = vim.lsp.get_client_by_id(args.data.client_id)
                 if not client then return end
                 if vim.tbl_contains(autoformat_filetypes, vim.bo.filetype) then
@@ -52,11 +53,15 @@ return {
         )
         -- Configure error/warnings interface
         vim.diagnostic.config({
-            virtual_text = true,
+            virtual_text = false,
+            virtual_lines = {
+                only_current_line = true,
+            },
             severity_sort = true,
             float = {
                 style = 'minimal',
                 border = 'rounded',
+                source = true,
                 header = '',
                 prefix = '',
             },

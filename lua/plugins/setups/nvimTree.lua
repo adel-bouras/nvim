@@ -10,16 +10,30 @@ return {
             sort = {
                 sorter = "case_sensitive",
             },
+
             view = {
                 width = 30,
             },
+
             renderer = {
                 group_empty = true,
             },
+
             filters = {
                 dotfiles = false,
                 custom = {},
                 exclude = { ".env" },
+            },
+
+            diagnostics = {
+                enable = true,
+                show_on_dirs = true,
+                show_on_open_dirs = true,
+                debounce_delay = 50,
+                severity = {
+                    min = vim.diagnostic.severity.HINT,
+                    max = vim.diagnostic.severity.ERROR,
+                },
             },
         })
     end,
