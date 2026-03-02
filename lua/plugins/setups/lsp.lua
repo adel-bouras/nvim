@@ -53,13 +53,10 @@ return {
         )
         -- Configure error/warnings interface
         vim.diagnostic.config({
-            virtual_text = false,
-            virtual_lines = {
-                only_current_line = true,
-            },
+            virtual_text = true,
             severity_sort = true,
             float = {
-                style = 'minimal',
+                style = "minimal",
                 border = 'rounded',
                 source = true,
                 header = '',

@@ -8,11 +8,11 @@ end
 return {
     {
         "ellisonleao/gruvbox.nvim",
-        lazy = true,
+        priority = 1000,
         config = function()
             vim.cmd.colorscheme("gruvbox")
             vim.o.background = "dark"
-            transparent() --uncomment for transparent nvim bg
+            --transparent() --uncomment for transparent nvim bg
         end,
     },
     {
@@ -26,7 +26,7 @@ return {
     },
     {
         "folke/tokyonight.nvim",
-        priority = 1000,
+        lazy = true,
         config = function()
             require("tokyonight").setup({
                 style = "moon", -- storm, moon, night, day
