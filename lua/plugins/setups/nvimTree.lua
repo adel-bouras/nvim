@@ -21,7 +21,39 @@ return {
 
             filters = {
                 dotfiles = false,
-                custom = {},
+                custom = {
+                    "^node_modules$",
+                    "^.git$",
+                    "^dist$",
+                    "^build$",
+                    "^out$",
+                    "^.next$",
+                    "^.nuxt$",
+                    "^.cache$",
+                    "^.parcel-cache$",
+                    "^coverage$",
+                    "^.nyc_output$",
+                    "^.turbo$",
+                    "^.svelte-kit$",
+                    -- Python
+                    "^__pycache__$",
+                    "^.venv$",
+                    "^venv$",
+                    "^.mypy_cache$",
+                    "^.pytest_cache$",
+                    "^*.egg-info$",
+                    -- Go
+                    "^vendor$",
+                    -- Rust
+                    "^target$",
+                    -- Java / Kotlin
+                    "^.gradle$",
+                    "^.idea$",
+                    -- General
+                    "^.DS_Store$",
+                    "^Thumbs.db$",
+                    "^*.log$",
+                },
                 exclude = { ".env" },
             },
 
