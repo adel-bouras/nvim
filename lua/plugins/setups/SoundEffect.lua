@@ -8,11 +8,11 @@ return {
         sounds = {
             -- Add custom sound paths or lists of sounds for other events here
             -- For example, BufRead can play a random sound from a list
-            --      BufRead = { path = { sound_dir .. "start1.ogg", sound_dir .. "start2.ogg" }, volume = 0-100 },
-            CursorMovedI = { path = sound_dir .. "tick_002.ogg", volume = 40 },
+            BufRead = { path = { sound_dir .. "maximize_008.ogg" }, volume = 100 },
+            CursorMovedI = { path = sound_dir .. "click_002.ogg", volume = 100 },
             --      InsertLeave = { path = sound_dir .. "toggle.ogg", volume = 0-100 },
-            --      ExitPre = { path = sound_dir .. "exit.ogg", volume = 0-100 },
-            --BufWrite = { path = sound_dir .. "tick_002.ogg", volume = 80 },
+            ExitPre = { path = sound_dir .. "glass_004.ogg", volume = 100 },
+            BufWrite = { path = sound_dir .. "drop_004.ogg", volume = 100 },
         },
     },
 }
