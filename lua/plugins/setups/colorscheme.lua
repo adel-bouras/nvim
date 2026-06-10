@@ -12,7 +12,7 @@ return {
         config = function()
             vim.cmd.colorscheme("gruvbox")
             vim.o.background = "dark"
-            --transparent() --uncomment for transparent nvim bg
+            transparent() --uncomment for transparent nvim bg
         end,
     },
     {

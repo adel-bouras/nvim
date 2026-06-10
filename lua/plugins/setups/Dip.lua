@@ -64,8 +64,11 @@ return {
 
             -- ── UI ─────────────────────────────────────────────────────────────────
             dapui.setup()
-            require("nvim-dap-virtual-text").setup()
-
+            --require("nvim-dap-virtual-text").setup({})
+            local ok, vtext = pcall(require, "nvim-dap-virtual-text")
+            if ok then
+                vtext.setup({})
+            end
             -- auto open/close UI with the debugger
             dap.listeners.after.event_initialized["dapui_config"] = function() dapui.open() end
             dap.listeners.before.event_terminated["dapui_config"] = function() dapui.close() end
