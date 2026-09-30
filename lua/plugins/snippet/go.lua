@@ -25,6 +25,26 @@ return {
                 t({ "", "\t" }),
                 i(3),
                 t({ "", "}" }),
+            }),
+        })
+        -- C snippets
+        ls.add_snippets("c", {
+            s("std", {
+                t("#include<stdio.h>"),
+                t({ "", "\tint main(){" }),
+                t({ "", "\t//Your code here" }),
+                t({ "", "}" }),
+            }),
+
+            s("fn", {
+                t("func "),
+                i(1, "name"),
+                t("("),
+                i(2),
+                t(") {"),
+                t({ "", "\t" }),
+                i(3),
+                t({ "", "}" }),
                 t({ "hi", "adel" }),
             }),
         })
